@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<SistemaEmpleado.Models.Empleado>
+
+@{
+    ViewData["Title"] = "Lista de Empleados";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a asp-action="Create" class="btn btn-primary">Agregar Empleado</a>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Departamento</th>
+            <th>Cargo</th>
+            <th>Fecha de Inicio</th>
+            <th>Salario</th>
+            <th>AFP</th>
+            <th>ARS</th>
+            <th>ISR</th>
+            <th>Sueldo Neto</th>
+            <th>Tiempo en la Empresa</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empleado in Model)
+        {
+            <tr>
+                <td>@empleado.Nombre</td>
+                <td>@empleado.Departamento?.Nombre</td>
+                <td>@empleado.Cargo?.Nombre</td>
+                <td>@empleado.FechaInicio.ToString("dd/MM/yyyy")</td>
+                <td>@empleado.Salario.ToString("C")</td>
+                <td>@empleado.AFP.ToString("C")</td>
+                <td>@empleado.ARS.ToString("C")</td>
+                <td>@empleado.ISR.ToString("C")</td>
+                <td>@empleado.SueldoNeto.ToString("C")</td>
+                <td>@empleado.TiempoEnEmpresa</td>
+                <td>@(empleado.Estado ? "Activo" : "Inactivo")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@empleado.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@empleado.Id" class="btn btn-info btn-sm">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@empleado.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

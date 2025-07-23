@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model SistemaEmpleado.Models.Empleado
+
+@{
+    ViewData["Title"] = "Agregar Empleado";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Nombre" class="control-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepartamentoId" class="control-label">Departamento</label>
+        <select asp-for="DepartamentoId" class="form-control"
+                asp-items="ViewBag.DepartamentoId"></select>
+        <span asp-validation-for="DepartamentoId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CargoId" class="control-label">Cargo</label>
+        <select asp-for="CargoId" class="form-control"
+                asp-items="ViewBag.CargoId"></select>
+        <span asp-validation-for="CargoId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FechaInicio" class="control-label">Fecha de Inicio</label>
+        <input asp-for="FechaInicio" class="form-control" type="date" />
+        <span asp-validation-for="FechaInicio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Salario" class="control-label"></label>
+        <input asp-for="Salario" class="form-control" />
+        <span asp-validation-for="Salario" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Estado" class="control-label">Estado</label>
+        <select asp-for="Estado" class="form-control">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

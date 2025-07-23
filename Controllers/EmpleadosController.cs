@@ -30,19 +30,25 @@ public class EmpleadosController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Empleado empleado)
     {
-        try
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            try
             {
                 _context.Add(empleado);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Error al guardar: " + ex.Message);
+            }
         }
-        catch (Exception ex)
+        else
         {
-            ModelState.AddModelError("", ex.Message);
+            ModelState.AddModelError("", "Por favor, complete todos los campos correctamente.");
         }
+
+        // Recargar dropdowns si algo falla
         ViewBag.DepartamentoId = new SelectList(_context.Departamentos, "Id", "Nombre", empleado.DepartamentoId);
         ViewBag.CargoId = new SelectList(_context.Cargos, "Id", "Nombre", empleado.CargoId);
         return View(empleado);

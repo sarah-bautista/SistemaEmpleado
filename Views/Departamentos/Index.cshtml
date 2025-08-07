@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@model IEnumerable<SistemaEmpleado.Models.Departamento>
+
+@{
+    ViewData["Title"] = "Lista de Departamentos";
+}
+
+<h2>Lista de Departamentos</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Agregar Departamento</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().Nombre)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var departamento in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => departamento.Nombre)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@departamento.Id" class="btn btn-info btn-sm">Ver</a>
+                    <a asp-action="Edit" asp-route-id="@departamento.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@departamento.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

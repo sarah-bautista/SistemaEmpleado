@@ -1,0 +1,13 @@
+bin/
+obj/
+AppData/
+*.exe
+*.nupkg
+*.cache
+*.user
+.vs/
+*.db
+*.log
+*.suo
+*.pdb
+*.DS_Store
